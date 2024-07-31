@@ -5,9 +5,8 @@ from selenium.webdriver.common.by import By
 
 @given(u'I am on home page screen')
 def step_impl(context):
-    context.driver = webdriver.Chrome()
-    context.driver.maximize_window()
-    context.driver.get('https://tutorialsninja.com/demo/')
+    expected_title = 'Your Store'
+    assert context.driver.title.__eq__(expected_title)
 
 
 @when(u'I enter valid product into the search box field')
@@ -23,7 +22,6 @@ def step_impl(context):
 @then(u'Valid product should get display in search results')
 def step_impl(context):
     assert context.driver.find_element(By.LINK_TEXT, 'HP LP3065').is_displayed()
-    context.driver.quit()
 
 
 @when(u'I enter invalid product into the search box field')
@@ -35,7 +33,6 @@ def step_impl(context):
 def step_impl(context):
     expected_message = 'Products meeting the search criteria'
     assert context.driver.find_element(By.XPATH, '//*[@id="content"]/h2').text.__eq__(expected_message)
-    context.driver.quit()
 
 
 @when(u'I don\'t enter any term into search box field')

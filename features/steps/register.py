@@ -6,9 +6,6 @@ from utilities.utils import get_new_email_with_timestamp
 
 @given(u'I navigate to register page')
 def step_impl(context):
-    context.driver = webdriver.Chrome()
-    context.driver.maximize_window()
-    context.driver.get('https://tutorialsninja.com/demo/')
     context.driver.find_element(By.XPATH, '//span[text()="My Account"]').click()
     context.driver.find_element(By.LINK_TEXT, 'Register').click()
 
@@ -33,7 +30,6 @@ def step_impl(context):
 def step_impl(context):
     expected_message = 'Your Account Has Been Created!'
     context.driver.find_element(By.XPATH, '//*[@id="content"]/h1').text.__eq__(expected_message)
-    context.driver.quit()
 
 
 @when(u'I fill all fields')
@@ -70,7 +66,6 @@ def step_impl(context):
     assert context.driver.find_element(By.XPATH, '//*[@id="account-register"]/div[1]').text.__contains__(
         expected_warning_message
     )
-    context.driver.quit()
 
 
 @when(u'I don\'t fill any fields')
@@ -108,4 +103,3 @@ def step_impl(context):
     assert context.driver.find_element(By.XPATH, '//*[@id="content"]/form/fieldset[2]/div[1]/div/div').text.__eq__(
         expected_pwd_warning_message
     )
-    context.driver.quit()
