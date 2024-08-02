@@ -76,9 +76,7 @@ def step_impl(context):
 
 @then(u'Proper warning message informing about duplicate account should be displayed')
 def step_impl(context):
-    assert context.register_page.retrieve_duplicate_email_warning(
-        "Warning: E-Mail Address is already registered!"
-    )
+    assert context.register_page.retrieve_duplicate_email_warning("Warning: E-Mail Address is already registered!")
 
 
 @when(u'I don\'t fill any fields')

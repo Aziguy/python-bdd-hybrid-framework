@@ -1,6 +1,6 @@
 Feature: Register account functionality
 
-  @register_done @account
+  @register_done
   Scenario: Register with mandatory fields
     Given I navigate to register page
     When I fill mandatory fields
