@@ -1,6 +1,6 @@
 Feature: Login functionality
 
-  @login_done
+  @login_done @pom
   Scenario: Login with valid credentials
     Given I navigated to login page
     When I enter valid email and valid password into the fields
