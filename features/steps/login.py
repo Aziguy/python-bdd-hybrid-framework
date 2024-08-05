@@ -10,9 +10,9 @@ def step_impl(context):
     context.login_page = context.home_page.select_login_option()
 
 
-@when(u'I enter valid email and valid password into the fields')
-def step_impl(context):
-    context.login_page.enter_login_credentials('aziguy_one@gmail.com', 'secure_password_one')
+@when(u'I enter valid email as "{email}" and valid password as "{password}" into the fields')
+def step_impl(context, email, password):
+    context.login_page.enter_login_credentials(email, password)
 
 
 @when(u'I click on login button')
@@ -25,9 +25,9 @@ def step_impl(context):
     assert context.account_page.display_status_of_edit_account_info_option()
 
 
-@when(u'I enter invalid email and valid password into the fields')
-def step_impl(context):
-    context.login_page.enter_login_credentials(get_new_email_with_timestamp(), 'secure_password_one')
+@when(u'I enter invalid email as "{email}" and valid password as "{password}" into the fields')
+def step_impl(context, email, password):
+    context.login_page.enter_login_credentials(email=get_new_email_with_timestamp(), password=password)
 
 
 @then(u'I should get a proper warning message')

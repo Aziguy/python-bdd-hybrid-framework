@@ -1,11 +1,16 @@
 Feature: Login functionality
 
-  @login_done @pom
-  Scenario: Login with valid credentials
+  @login_done
+  Scenario Outline: Login with valid credentials
     Given I navigated to login page
-    When I enter valid email and valid password into the fields
+    When I enter valid email as "<email>" and valid password as "<password>" into the fields
     And I click on login button
     Then I should get logged in
+    Examples:
+      |email                          |password               |
+      |aziguy_one@gmail.com           |secure_password_one    |
+      |aziguy_two@gmail.com           |secure_password_two    |
+      |aziguy_two@gmail.com           |secure_password_three  |
 
   @login_done
   Scenario: Login with invalid email and valid password
