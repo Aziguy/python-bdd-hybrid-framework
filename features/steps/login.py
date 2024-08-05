@@ -36,14 +36,14 @@ def step_impl(context):
     assert context.login_page.display_status_of_warning_message(expected_warning_message)
 
 
-@when(u'I enter valid email and invalid password into the fields')
-def step_impl(context):
-    context.login_page.enter_login_credentials('aziguy_one@gmail.com', 'secure_password_one_false')
+@when(u'I enter valid email as "{email}" and invalid password as "{password}" into the fields')
+def step_impl(context, email, password):
+    context.login_page.enter_login_credentials(email, password)
 
 
-@when(u'I enter invalid email and invalid password into the fields')
-def step_impl(context):
-    context.login_page.enter_login_credentials(get_new_email_with_timestamp(), 'secure_password_one_false')
+@when(u'I enter invalid email as "{email}" and invalid password as "{password}" into the fields')
+def step_impl(context, email, password):
+    context.login_page.enter_login_credentials(email=get_new_email_with_timestamp(), password=password)
 
 
 @then(u'I should get proper warning message')

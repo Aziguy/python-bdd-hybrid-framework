@@ -1,7 +1,5 @@
 from behave import *
-from features.pages.AccountSuccessPage import AccountSuccessPage
 from features.pages.HomePage import HomePage
-from features.pages.RegisterPage import RegisterPage
 from utilities.utils import get_new_email_with_timestamp
 
 
@@ -12,18 +10,19 @@ def step_impl(context):
     context.register_page = context.home_page.select_register_option()
 
 
-@when(u'I fill mandatory fields')
+@when(u'I enter below details into mandatory fields')
 def step_impl(context):
-    context.register_page.register_an_account(
-        first_name='John',
-        last_name='Doe',
-        email=get_new_email_with_timestamp(),
-        telephone='0123456789',
-        password='the_super_password',
-        password_confirm='the_super_password',
-        yes_or_no='no',
-        privacy_policy='select',
-    )
+    for row in context.table:
+        context.register_page.register_an_account(
+            first_name=row["first_name"],
+            last_name=row["last_name"],
+            email=get_new_email_with_timestamp(),
+            telephone=row["telephone"],
+            password=row["password"],
+            password_confirm=row["password"],
+            yes_or_no='no',
+            privacy_policy='select',
+        )
 
 
 @when(u'I click on Continue button')
@@ -36,37 +35,39 @@ def step_impl(context):
     assert context.account_success_page.display_status_of_account_created_heading("Your Account Has Been Created!")
 
 
-@when(u'I fill all fields')
+@when(u'I enter below details into all fields')
 def step_impl(context):
-    context.register_page.register_an_account(
-        first_name='John',
-        last_name='Doe',
-        email=get_new_email_with_timestamp(),
-        telephone='0123456789',
-        password='the_super_password',
-        password_confirm='the_super_password',
-        yes_or_no='yes',
-        privacy_policy='select',
-    )
+    for row in context.table:
+        context.register_page.register_an_account(
+            first_name=row["first_name"],
+            last_name=row["last_name"],
+            email=get_new_email_with_timestamp(),
+            telephone=row["telephone"],
+            password=row["password"],
+            password_confirm=row["password"],
+            yes_or_no='yes',
+            privacy_policy='select',
+        )
 
 
-@when(u'I fill all fields except email field')
+@when(u'I enter details into all fields except email field')
 def step_impl(context):
-    context.register_page.register_an_account(
-        first_name='John',
-        last_name='Doe',
-        email='',
-        telephone='0123456789',
-        password='the_super_password',
-        password_confirm='the_super_password',
-        yes_or_no='no',
-        privacy_policy='select',
-    )
+    for row in context.table:
+        context.register_page.register_an_account(
+            first_name=row["first_name"],
+            last_name=row["last_name"],
+            email=get_new_email_with_timestamp(),
+            telephone=row["telephone"],
+            password=row["password"],
+            password_confirm=row["password"],
+            yes_or_no='no',
+            privacy_policy='select',
+        )
 
 
-@when(u'I fill an existing amail address into the email field')
-def step_impl(context):
-    context.register_page.enter_email("aziguy_one@gmail.com")
+@when(u'I fill an existing email address as "{email}" into the email field')
+def step_impl(context, email):
+    context.register_page.enter_email(email)
 
 
 @then(u'Proper warning message informing about duplicate account should be displayed')
