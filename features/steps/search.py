@@ -1,5 +1,4 @@
 from behave import *
-from selenium.webdriver.common.by import By
 
 from features.pages.HomePage import HomePage
 from features.pages.SearchPage import SearchPage
@@ -23,7 +22,6 @@ def step_impl(context):
 
 @then(u'Valid product should get display in search results')
 def step_impl(context):
-    context.search_page = SearchPage(context.driver)
     assert context.search_page.display_status_of_product()
 
 
@@ -34,7 +32,6 @@ def step_impl(context):
 
 @then(u'Proper message should be displayed in search results')
 def step_impl(context):
-    context.search_page = SearchPage(context.driver)
     assert context.search_page.display_status_of_message("There is no product that matches the search criteria.")
 
 

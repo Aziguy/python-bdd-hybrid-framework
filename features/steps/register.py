@@ -1,5 +1,4 @@
 from behave import *
-from selenium.webdriver.common.by import By
 from features.pages.AccountSuccessPage import AccountSuccessPage
 from features.pages.HomePage import HomePage
 from features.pages.RegisterPage import RegisterPage
@@ -15,7 +14,6 @@ def step_impl(context):
 
 @when(u'I fill mandatory fields')
 def step_impl(context):
-    context.register_page = RegisterPage(context.driver)
     context.register_page.register_an_account(
         first_name='John',
         last_name='Doe',
@@ -30,18 +28,16 @@ def step_impl(context):
 
 @when(u'I click on Continue button')
 def step_impl(context):
-    context.register_page.click_on_continue_button()
+    context.account_success_page = context.register_page.click_on_continue_button()
 
 
 @then(u'Account should be created')
 def step_impl(context):
-    context.account_success_page = AccountSuccessPage(context.driver)
     assert context.account_success_page.display_status_of_account_created_heading("Your Account Has Been Created!")
 
 
 @when(u'I fill all fields')
 def step_impl(context):
-    context.register_page = RegisterPage(context.driver)
     context.register_page.register_an_account(
         first_name='John',
         last_name='Doe',
@@ -56,7 +52,6 @@ def step_impl(context):
 
 @when(u'I fill all fields except email field')
 def step_impl(context):
-    context.register_page = RegisterPage(context.driver)
     context.register_page.register_an_account(
         first_name='John',
         last_name='Doe',
@@ -81,7 +76,6 @@ def step_impl(context):
 
 @when(u'I don\'t fill any fields')
 def step_impl(context):
-    context.register_page = RegisterPage(context.driver)
     context.register_page.register_an_account(
         first_name='',
         last_name='',

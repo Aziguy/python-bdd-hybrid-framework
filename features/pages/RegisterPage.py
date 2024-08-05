@@ -49,6 +49,7 @@ class RegisterPage(BasePage):
 
     def click_on_continue_button(self):
         self.driver.find_element(By.XPATH, self.continue_button_xpath).click()
+        return AccountSuccessPage(self.driver)
 
     def select_yes_radio_button(self):
         self.click_on_element("yes_radio_button_xpath", self.yes_radio_button_xpath)
